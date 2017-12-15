@@ -10,4 +10,16 @@ else :
     usr = in[d+1]
     o = in.index('-o')
     slr = in[o+1]
-    with open('cfg') as f:
+    dic = {}
+    try :
+        with open('cfg') as f:
+            for i in f:
+                kv = i.strip().split('=')
+                k = kv[0]
+                v = kv[1]
+                dic[k] = v
+    except FileNotFoundError :
+        print('File Not Found')
+~                                                                               
+                         
+    
