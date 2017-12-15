@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+import sys
+if len(sys.argv) != 7:
+    print('Parameter Error')
+else :
+    in = sys.argv[1:]
+    c = in.index('-c')
+    cfg = in[c+1]
+    d = in.index('-d')
+    usr = in[d+1]
+    o = in.index('-o')
+    slr = in[o+1]
+    with open('cfg') as f:
