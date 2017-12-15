@@ -14,7 +14,8 @@ else :
     except ValueError :
         print('Parameter Error')
     dic = {}
-    dicu = {}
+    #dicu = {}
+    c = 0
     try :
         with open('cfg') as f:
             for i in f:
@@ -34,14 +35,32 @@ else :
                 kv1 = i.strip(',')
                 k1 = kv1[0]
                 v1 = kv1[1]
-                dicu[k1] = v1
+                #dicu[k1] = v1
                 if v1 < JiShuL:
                     shb = v1*ks
                 elif v1 >= JiShuL and v1 < JiShuH:
                     shb = v1*ks
                 elif v1 >= JiShuH:
                     shb = JiShuH*ks
-                    
+                b = v1-shb-3500
+                if b > 0 and b <= 1500:
+                    c = 0.03*b
+                elif b > 1500 and b <=4500:
+                    c = 0.1*b-105
+                elif b > 4500 and b <= 9000:
+                    c = 0.2*b-555
+                elif b > 9000 and b <= 35000:
+                    c = 0.25*b-1005
+                elif b > 35000 and b <= 55000:
+                    c = 0.3**b-2755
+                elif b > 55000 and b <= 80000:
+                    c = 0.35*b-5505
+                elif b > 80000:
+                    c = 0.45*b-13505
+                #file = '/tmp/gongzi.csv'
+                sj = v1-shb-c
+                with open(slr,'w') as fl:
+                    fl.write(str(k1)+','+str(v1)+','+str(format(shb,'.2f'))+','+str(format(c,'.2f'))+','+str(format(sj,'.2f')))
     except FileNotFoundError,ValueError :
         print('File Not Found')                                                                            
     
