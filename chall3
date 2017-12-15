@@ -3,14 +3,18 @@ import sys
 if len(sys.argv) != 7:
     print('Parameter Error')
 else :
-    in = sys.argv[1:]
-    c = in.index('-c')
-    cfg = in[c+1]
-    d = in.index('-d')
-    usr = in[d+1]
-    o = in.index('-o')
-    slr = in[o+1]
+    try:
+        in = sys.argv[1:]
+        c = in.index('-c')
+        cfg = in[c+1]
+        d = in.index('-d')
+        usr = in[d+1]
+        o = in.index('-o')
+        slr = in[o+1]
+    except ValueError :
+        print('Parameter Error')
     dic = {}
+    dicu = {}
     try :
         with open('cfg') as f:
             for i in f:
@@ -18,8 +22,27 @@ else :
                 k = kv[0]
                 v = kv[1]
                 dic[k] = v
-    except FileNotFoundError :
+    except FileNotFoundError,ValueError :
         print('File Not Found')
-~                                                                               
-                         
+   try:
+        ks = int(dic[Yanglao]+dic[YiLiao]+dic[ShiYe]+dic[GongShang]+dic[Shengyu]+dic[GongJiJin])                    
+    except :
+        print('wrong')
+   try :
+        with open('usr') as u:
+            for i in u:
+                kv1 = i.strip(',')
+                k1 = kv1[0]
+                v1 = kv1[1]
+                dicu[k1] = v1
+                if v1 < JiShuL:
+                    shb = v1*ks
+                elif v1 >= JiShuL and v1 < JiShuH:
+                    shb = v1*ks
+                elif v1 >= JiShuH:
+                    shb = JiShuH*ks
+                    
+    except FileNotFoundError,ValueError :
+        print('File Not Found')                                                                            
+    
     
