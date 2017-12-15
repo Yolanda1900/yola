@@ -26,7 +26,7 @@ if len(sys.argv) > 1:
         elif b > 80000:
             c = 0.45*b-13505
         d = a-shb-c
-        print(n, ':',format(d,'.2f'))
+        print(str（n）+':'+str（format(d,'.2f')）)
 else :
     print('Parameter Error')
         
