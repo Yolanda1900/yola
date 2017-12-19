@@ -4,44 +4,46 @@ if len(sys.argv) != 7:
     print('Parameter Error')
 else :
     try:
-        in = sys.argv[1:]
-        c = in.index('-c')
-        cfg = in[c+1]
-        d = in.index('-d')
-        usr = in[d+1]
-        o = in.index('-o')
-        slr = in[o+1]
+        args = sys.argv[1:]
+        c = args.index('-c')
+        cfg = args[c+1]
+        d = args.index('-d')
+        usr = args[d+1]
+        o = args.index('-o')
+        slr = args[o+1]
     except ValueError :
         print('Parameter Error')
     dic = {}
-    #dicu = {}
     c = 0
+    sj = 0
+    ks = 0
     try :
         with open('cfg') as f:
             for i in f:
                 kv = i.strip().split('=')
-                k = kv[0]
-                v = kv[1]
+                k = kv[0].strip()
+                v = float(kv[1].strip())
                 dic[k] = v
-    except FileNotFoundError,ValueError :
+    except FileNotFoundError:
         print('File Not Found')
-   try:
-        ks = int(dic[Yanglao]+dic[YiLiao]+dic[ShiYe]+dic[GongShang]+dic[Shengyu]+dic[GongJiJin])                    
+    except ValueError:
+        print('Parameter Error')
+    try:
+        ks = (dic['Yanglao']+dic['YiLiao']+dic['ShiYe']+dic['GongShang']+dic['ShengYu']+dic['GongJiJin'] )                    
     except :
         print('wrong')
-   try :
-        with open('usr') as u:
+    try :
+        with open(usr) as u:
             for i in u:
                 kv1 = i.strip(',')
-                k1 = kv1[0]
-                v1 = kv1[1]
-                #dicu[k1] = v1
-                if v1 < JiShuL:
+                k1 = int(kv1[0])
+                v1 = int(kv1[1])
+                if v1 < int(dic['JiShuL']):
                     shb = v1*ks
-                elif v1 >= JiShuL and v1 < JiShuH:
+                elif v1 >= int(dic['JiShuL']) and v1 < int(dic['JiShuH']):
                     shb = v1*ks
-                elif v1 >= JiShuH:
-                    shb = JiShuH*ks
+                elif v1 >= int(dic['JiShuH']):
+                    shb = int(dic['JiShuH'])*ks
                 b = v1-shb-3500
                 if b > 0 and b <= 1500:
                     c = 0.03*b
@@ -52,16 +54,17 @@ else :
                 elif b > 9000 and b <= 35000:
                     c = 0.25*b-1005
                 elif b > 35000 and b <= 55000:
-                    c = 0.3**b-2755
+                    c = 0.3*b-2755
                 elif b > 55000 and b <= 80000:
                     c = 0.35*b-5505
                 elif b > 80000:
                     c = 0.45*b-13505
-                #file = '/tmp/gongzi.csv'
                 sj = v1-shb-c
                 with open(slr,'w') as fl:
                     fl.write(str(k1)+','+str(v1)+','+str(format(shb,'.2f'))+','+str(format(c,'.2f'))+','+str(format(sj,'.2f')))
-    except FileNotFoundError,ValueError :
-        print('File Not Found')                                                                            
+    except FileNotFoundError:
+        print('File Not Found') 
+    except ValueError:
+        print('Parameter error')
     
     
