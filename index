@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+  </head>
+  <body>
+    <ul>
+     {% for title in title_list %}
+     <li>{{ title }}</li>
+     {% endfor %}
+    </ul>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>404</title>
+  </head>
+  <body>
+    <h1>shiyanlou 404</h1>
+  </body>
+</html>
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>file</title>
+  </head>
+  <body>
+    <h1>{{ file_item['title'] }}</h1>
+    <p>{{ file_item['created_time'] }}</p>
+    <p>{{ file_item['content'] }}</p>
+  </body>
+</html>
